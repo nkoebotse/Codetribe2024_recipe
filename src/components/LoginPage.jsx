@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 
+
 function LoginPage() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -33,7 +34,7 @@ function LoginPage() {
 
   return (
     <div className="container-a">
-      <h2>Login</h2>
+      <h2 className="container-b">Login</h2>
       <form onSubmit={handleLogin}>
         <input
           type="text"
@@ -47,8 +48,10 @@ function LoginPage() {
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          className="container-a"
         />
-        <button type="submit" className="container-a">Login</button>
+        <button type="submit" className="container-b">Login</button>
+      
       </form>
       <div>
         <p>Don't have an account? <Link to="/register">Register here</Link></p>

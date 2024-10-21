@@ -1,5 +1,5 @@
 import { useState } from 'react'; 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 
 function RegisterPage() {
@@ -33,7 +33,7 @@ function RegisterPage() {
 
   return (
     <div className="container-a">
-      <h2>Register</h2>
+      <h2 className="container-b">Register</h2>
       <form onSubmit={handleRegister}>
         <input
           type="text"
@@ -47,9 +47,12 @@ function RegisterPage() {
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          className="container-a"
         />
-        <button type="submit" className="container-a">Register</button>
+        <button type="submit" className="container-b">Register</button>
+        <p> go to your <Link to="/login" >Login</Link></p>
       </form>
+      
     </div>
   );
 }

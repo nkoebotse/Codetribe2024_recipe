@@ -31,7 +31,7 @@ body {
   justify-content: center; /* Center content vertically */
   min-width: 320px;
   min-height: 100vh;
-  background-image: url('assets/pexels-ella-olsson-572949-1640773.jpg');
+  background-image: url('assets/pexels-goumbik-349610.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -134,4 +134,61 @@ button.search-button {
 .container-a{
   display: flex;
   flex-direction: column;
+  width: 200px;
+  margin-top: 2px;
+  
+ 
+}
+.container-b{
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  margin-top: 5px;
+ padding-left: 65px;
+}
+
+
+
+
+
+.container {
+  padding: 20px;
+}
+
+.featured-foods {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.food-item {
+  text-align: center;
+  margin: 10px;
+  width: 200px;
+}
+
+.food-image {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  
+}
+
+.recipe-item {
+  margin-bottom: 20px;
+}
+
+.search-container {
+  margin-bottom: 20px;
+}
+
+.search-input {
+  padding: 10px;
+  width: 300px;
+  margin-right: 10px;
+}
+
+.search-button {
+  padding: 10px;
 }

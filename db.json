@@ -14,7 +14,24 @@
       "id": "7d84",
       "username": "elliot@gamil.com",
       "password": "12345678"
+    },
+    {
+      "id": "598d",
+      "username": "elliot@gmail.com",
+      "password": "12345678"
     }
   ],
-  "recipes": []
+  "recipes": [
+    {
+      "id": "ed5e",
+      "name": "",
+      "ingredients": "",
+      "instructions": "",
+      "category": "",
+      "prepTime": "",
+      "cookTime": "",
+      "servings": "",
+      "image": ""
+    }
+  ]
 }

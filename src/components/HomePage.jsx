@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import  { useState, useEffect } from 'react';
 import axios from 'axios';
+
 
 function HomePage() {
   const [recipes, setRecipes] = useState([]);
@@ -14,22 +15,50 @@ function HomePage() {
     servings: '',
     image: ''
   });
+  const [foods, setFoods] = useState([]); // Updated to fetch from API
   const [imageLoading, setImageLoading] = useState(false);
   const [error, setError] = useState('');
 
-  // Use your actual Spoonacular API key here
   const SPOONACULAR_API_KEY = '89d31250145a4c65adaebaa8fa7c702b';
   const SPOONACULAR_API_URL = 'https://api.spoonacular.com/recipes/complexSearch';
 
+  // Fetch recipes from your local backend
   useEffect(() => {
     axios.get('http://localhost:5000/recipes')
       .then(response => setRecipes(response.data))
       .catch(error => console.error('Error fetching recipes:', error));
   }, []);
 
+  // Fetch featured foods from the Spoonacular API
+  useEffect(() => {
+    const fetchFoods = async () => {
+      setImageLoading(true);
+      try {
+        const response = await axios.get(SPOONACULAR_API_URL, {
+          params: {
+            number: 5, // Get 5 food items for the featured list
+            apiKey: SPOONACULAR_API_KEY
+          }
+        });
+        if (response.data.results) {
+          setFoods(response.data.results); // Set the food data to the state
+        } else {
+          console.error('No results found for the featured foods.');
+        }
+      } catch (error) {
+        console.error('Error fetching featured foods:', error.message);
+        setError('Failed to load featured foods. Please try again later.');
+      } finally {
+        setImageLoading(false);
+      }
+    };
+
+    fetchFoods();
+  }, []);
+
   const fetchRecipeImage = async (recipeName) => {
     setImageLoading(true);
-    setError(''); // Clear previous errors
+    setError('');
     try {
       const response = await axios.get(SPOONACULAR_API_URL, {
         params: {
@@ -39,7 +68,7 @@ function HomePage() {
         }
       });
       if (response.data.results && response.data.results.length > 0) {
-        const imageUrl = response.data.results[0]?.image; // Get the first image result
+        const imageUrl = response.data.results[0]?.image;
         if (imageUrl) {
           setNewRecipe(prevRecipe => ({ ...prevRecipe, image: imageUrl }));
         } else {
@@ -89,6 +118,21 @@ function HomePage() {
 
   return (
     <div className="container">
+      <h1>Featured Foods</h1>
+      <div className="featured-foods">
+        {imageLoading ? (
+          <p>Loading foods...</p>
+        ) : (
+          foods.map((food, index) => (
+            <div key={index} className="food-item">
+              <img src={food.image} alt={food.title} className="food-image" />
+              <h2>{food.title}</h2>
+            </div>
+          ))
+        )}
+        {error && <p style={{ color: 'red' }}>{error}</p>}
+      </div>
+
       <h1>Recipe List</h1>
       <div className="search-container">
         <input
